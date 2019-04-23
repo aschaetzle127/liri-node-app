@@ -43,7 +43,6 @@ function showConcertInfo(userInput) {
         console.log("~~~~~~~~EVENT INFO~~~~~~~~");
         console.log(i);
         console.log("Venue: " + concerts[i].venue.name);
-        console.log("Date: " + concerts[i].datetime);
         console.log("Place: " + concerts[i].venue.city);
         console.log("Date: " + concerts[i].datetime);
         console.log("~~~~~~~~~~~~~~~~~~~~~~");
@@ -72,7 +71,7 @@ function showSongInfo(userInput) {
       }
       var songs = data.tracks.items;
 
-      for (var i = 0; i < songs.length; i++) {
+      for (var i = 0; i < 5; i++) {
         console.log("~~~~~~~~SONG INFO~~~~~~~");
         console.log(i);
         console.log("Song: " + songs[i].name);
@@ -99,7 +98,7 @@ function showMovieInfo(userInput) {
     if (!error && response.statusCode === 200) {
       var movies = JSON.parse(body);
       console.log("~~~~~~~~MOVIE INFO~~~~~~~~");
-      console.log("Title: " + movies.TItle);
+      console.log("Title: " + movies.Title);
       console.log("IMDB Rating: " + movies.imdbRating);
       console.log("Rotten Tomatoes Rating: " + theRottenToms(movies));
       console.log("Country: " + movies.Country);
@@ -122,5 +121,16 @@ function theRottenTomsObject(data) {
 }
 
 function theRottenToms(data) {
-  return theRottenTomsObject(data).value;
+  return theRottenTomsObject(data).Value;
+}
+
+// Do what it says
+function showSomething() {
+  fs.readFile("random.txt", "utf8", function(err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    var dataArr = data.split(",");
+    userInputs(dataArr[0], dataArr[1]);
+  });
 }
