@@ -1,5 +1,6 @@
 # liri-node-app
 
+<<<<<<< HEAD
 
 This liri node application intake's four user input commands and returns API JSON information in order to fulfill said commands.  
 
@@ -28,3 +29,4 @@ do-what-it-says
 Please see the video below for an example of a full run through of the application:
 
 https://youtu.be/W48bISQQ3NE
+
