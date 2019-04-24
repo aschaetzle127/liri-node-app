@@ -1,4 +1,6 @@
 require("dotenv").config();
+const chalk = require("chalk");
+var moment = require("moment");
 const request = require("request");
 const fs = require("fs");
 const keys = require("./keys.js");
@@ -40,12 +42,14 @@ function showConcertInfo(userInput) {
     if (!error && response.statusCode === 200) {
       var concerts = JSON.parse(body);
       for (var i = 0; i < concerts.length; i++) {
-        console.log("~~~~~~~~EVENT INFO~~~~~~~~");
+        console.log(chalk.cyan("~~~~~~~~EVENT INFO~~~~~~~~"));
         console.log(i);
         console.log("Venue: " + concerts[i].venue.name);
         console.log("Place: " + concerts[i].venue.city);
-        console.log("Date: " + concerts[i].datetime);
-        console.log("~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(
+          "Date: " + moment(concerts[i].datetime).format("MM/DD/YYYY")
+        );
+        console.log(chalk.cyan("~~~~~~~~~~~~~~~~~~~~~~"));
       }
     } else {
       console.log("Error!");
@@ -72,13 +76,13 @@ function showSongInfo(userInput) {
       var songs = data.tracks.items;
 
       for (var i = 0; i < 5; i++) {
-        console.log("~~~~~~~~SONG INFO~~~~~~~");
+        console.log(chalk.green("~~~~~~~~SONG INFO~~~~~~~"));
         console.log(i);
         console.log("Song: " + songs[i].name);
         console.log("Preview: " + songs[i].preview_url);
         console.log("Album: " + songs[i].album.name);
         console.log("Artist(s): " + songs[i].artists[0].name);
-        console.log("~~~~~~~~~~~~~~~~~~~~~~");
+        console.log(chalk.green("~~~~~~~~~~~~~~~~~~~~~~"));
       }
     }
   );
@@ -88,7 +92,11 @@ function showSongInfo(userInput) {
 
 function showMovieInfo(userInput) {
   if (userInput === undefined) {
-    userInput = "";
+    userInput = "Mr. Nobody";
+    console.log(
+      "If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/"
+    );
+    console.log("It's on Netflix!");
   }
 
   var queryUrl =
@@ -97,7 +105,7 @@ function showMovieInfo(userInput) {
   request(queryUrl, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       var movies = JSON.parse(body);
-      console.log("~~~~~~~~MOVIE INFO~~~~~~~~");
+      console.log(chalk.magenta("~~~~~~~~MOVIE INFO~~~~~~~~"));
       console.log("Title: " + movies.Title);
       console.log("IMDB Rating: " + movies.imdbRating);
       console.log("Rotten Tomatoes Rating: " + theRottenToms(movies));
@@ -105,7 +113,7 @@ function showMovieInfo(userInput) {
       console.log("Language: " + movies.Language);
       console.log("Plot: " + movies.Plot);
       console.log("Actors: " + movies.Actors);
-      console.log("~~~~~~~~~~~~~~~~~~~~~~");
+      console.log(chalk.magenta("~~~~~~~~~~~~~~~~~~~~~~"));
     } else {
       console.log("Error!");
     }
