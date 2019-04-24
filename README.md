@@ -22,4 +22,4 @@ do-what-it-says
 
 Please see the video below for an example of a full run through of the application:
 
-https://youtu.be/W48bISQQ3NE
+![video](https://youtu.be/W48bISQQ3NE)
